@@ -20,7 +20,7 @@ pip install -e /path/to/django-maintenance-mode
 
 Add `'maintenance_mode'` to your `INSTALLED_APPS` in `settings.py`:
 
-```bash
+```python
 INSTALLED_APPS = [
     ...
     'maintenance_mode',
@@ -29,7 +29,7 @@ INSTALLED_APPS = [
 
 Add the middleware to your `MIDDLEWARE`:
 
-```bash
+```python
 MIDDLEWARE = [
     ...
     'maintenance_mode.middleware.MaintenanceModeMiddleware',
@@ -40,7 +40,7 @@ MIDDLEWARE = [
 ## Configuration
 You can configure the maintenance mode settings in `settings.py`. Below are the available options:
 
-```bash
+```python
 MAINTENANCE_MODE = True  # Enable maintenance mode (default: False)
 MAINTENANCE_ALLOWED_IPS = ['127.0.0.1', '192.168.1.1']  # List of allowed IPs
 MAINTENANCE_ALLOWED_USERS = ['admin', 'superuser']      # List of allowed usernames
@@ -52,7 +52,7 @@ MAINTENANCE_TEMPLATE = 'custom_maintenance.html'        # Path to your custom ma
 ## Default Settings
 If no configuration is provided, the following defaults will be used:
 
-```bash
+```python
 MAINTENANCE_MODE = False
 MAINTENANCE_ALLOWED_IPS = []
 MAINTENANCE_ALLOWED_USERS = []
@@ -64,12 +64,12 @@ MAINTENANCE_TEMPLATE = 'maintenance.html'
 ## Usage
 **1- Enabling/Disabling Maintenance Mode**
 To enable maintenance mode, set `MAINTENANCE_MODE` to True in your `settings.py`:
-```bash
+```python
 MAINTENANCE_MODE = True
 ```
 Alternatively, you can toggle maintenance mode dynamically using a view:
 
-```bash
+```python
 from django.urls import path
 from maintenance_mode.views import toggle_maintenance_mode
 
@@ -98,7 +98,7 @@ Maintenance mode is now ON
 
 You can specify a custom template for the maintenance page by setting the `MAINTENANCE_TEMPLATE` in your settings:
 
-```bash
+```python
 MAINTENANCE_TEMPLATE = 'custom_maintenance.html'  # Path to your custom template
 ```
 
@@ -106,7 +106,7 @@ The default template is `maintenance.html`. If you provide a custom template, en
 
 **Example Custom Template** `(templates/custom_maintenance.html)`:
 
-```bash
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -136,15 +136,20 @@ The default template is `maintenance.html`. If you provide a custom template, en
 ```
 
 **3- Bypassing Maintenance Mode**
+
 ### Allowed IPs
+
 Specify a list of IP addresses that can bypass maintenance mode:
-```bash
+
+```python
 MAINTENANCE_ALLOWED_IPS = ['127.0.0.1', '192.168.1.1']
 ```
 
 ### Allowed Users
+
 Specify a list of usernames that can bypass maintenance mode:
-```bash
+
+```python
 MAINTENANCE_ALLOWED_USERS = ['admin', 'superuser']
 ```
 
@@ -156,27 +161,34 @@ http://example.com/?token=my-secret-token
 ```
 
 Set the token in your settings:
-```bash
+
+```python
 MAINTENANCE_ACCESS_TOKEN = 'my-secret-token'
 ```
 
 Allowed URLs
+
 Specify URLs that should remain accessible during maintenance mode:
-```bash
+
+```python
 MAINTENANCE_ALLOWED_URLS = ['/admin/', '/api/', '/health-check/']
 ```
+
 **4- Admin Panel Access**
+
 The admin panel (`/admin/`) is always accessible during maintenance mode by default. You can customize this behavior by modifying the `MAINTENANCE_ALLOWED_URLS` setting.
+
 
 ### Testing
 To test the package, you can use the following commands:
+
 ```bash
 python manage.py test maintenance_mode
 ```
 
 **Example Test Case**
 
-```bash
+```python
 from django.test import TestCase, RequestFactory
 from maintenance_mode.middleware import MaintenanceModeMiddleware
 
