@@ -12,6 +12,11 @@ Install the package using `pip`:
 ```bash
 pip install django-maintenance-mode
 ```
+Alternatively, if you're installing from a local source:
+
+```bash
+pip install -e /path/to/django-maintenance-mode
+```
 
 Add `'maintenance_mode'` to your `INSTALLED_APPS` in `settings.py`:
 
